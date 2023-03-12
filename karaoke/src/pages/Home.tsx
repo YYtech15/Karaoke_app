@@ -23,7 +23,7 @@ const ResponsiveButtonStack = styled(Stack)({
     "& > *": {
         flex: "1 0 17%",
         width: "100%",
-        margin: "5px",
+        margin: "6px",
     },
 });
 

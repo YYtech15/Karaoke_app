@@ -14,8 +14,8 @@ This application introduces karaoke songs by difficulty level and allows you to 
 - People who like to sing at karaoke
 - People who want to keep a record of their all-time karaoke scores.
 # デモ(DEMO)
- 魅力が直感的に伝えわるデモ動画や図解を載せる
- 
+デモ動画URL:
+
 # 機能(Features)
  - 難易度別のカラオケ曲を紹介してくれる
 （難易度は千鳥の鬼レンチャンというテレビ番組の情報を基にしています）
@@ -26,7 +26,7 @@ This application introduces karaoke songs by difficulty level and allows you to 
 # 追加予定機能(Features to be added)
 - カラオケで歌った曲の記録をカラオケ日記という形で残す事が出来ます。
 - ルームを作成し、友達と参加する事で一緒にカラオケに行く時などに、ルーム内で各自がスコアを記録することで、そのルームでのカラオケの得点ランキングが表示されます。
-  
+
 - You can keep a record of the songs you have sung at karaoke in the form of a karaoke diary.
 - By creating a room and joining with friends to go karaoke together, each person in the room can record their own score, and the karaoke score ranking for that room will be displayed.
 # 開発環境(Development Environment)
@@ -53,7 +53,7 @@ https://www.python.org/downloads/
 
 # Usage
 ## frontend
- 
+
 ```bash
 1. git clone https://github.com/YYtech15/Karaoke_app.git
 2. cd karaoke
@@ -88,17 +88,21 @@ https://www.python.org/downloads/
 [![My Skills](https://skillicons.dev/icons?i=py,fastapi,gcp)](https://skillicons.dev)
 
 # URL
+## frontend
+https://karaoke-app-three.vercel.app/
+
+## backend
 
 # Author
- 
+
 - YY
 - Nagoya.Univ
 - midori1140flower@gmail.com
- 
+
 # License
- 
+
 "karaokeApp" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
- 
+
 # FAQ
 - 質問がある方はこちらのメールにご連絡ください。
 (midori1140flower@gmail.com)
