@@ -3,8 +3,7 @@ import Home from '../pages/Home'
 import Login from '../components/auth/Login'
 import Room from '../pages/Room'
 import Diary from '../pages/Diary'
-import Sample from '../pages/Sample'
-import SampleComponent from '../pages/SampleComponet'
+import SignIn from '../components/auth/SignIn'
 
 
 const AppRouter = () => {
@@ -15,8 +14,7 @@ const AppRouter = () => {
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/room' element={<Room />}></Route>
                 <Route path='/diary' element={<Diary />}></Route>
-                <Route path='/sample' element={<Sample />}></Route>
-                <Route path='/sample2' element={<SampleComponent />}></Route>
+                <Route path='/signIn' element={<SignIn />}></Route>
             </Routes>
         </Router>
     )
