@@ -9,10 +9,10 @@ This application introduces karaoke songs by difficulty level and allows you to 
 - カラオケで歌うのが好きな人
 - カラオケの歴代得点を記録として残したい人
 
-- People who like to sing at karaoke
-- People who want to keep a record of their all-time karaoke scores.
 - Students
 - Working people
+- People who like to sing at karaoke
+- People who want to keep a record of their all-time karaoke scores.
 # デモ(DEMO)
  魅力が直感的に伝えわるデモ動画や図解を載せる
  
