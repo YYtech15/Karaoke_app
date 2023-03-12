@@ -27,6 +27,7 @@ const HomeAppBar = () => {
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
@@ -58,9 +59,29 @@ const HomeAppBar = () => {
     return (
         <AppBar position="static">
             <Container maxWidth="md">
-                <Toolbar disableGutters>
-                    <MicExternalOnIcon />
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                <Toolbar sx={{ justifyContent: 'space-between' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <IconButton onClick={handleOpenNavMenu} sx={{ display: { xs: 'block', md: 'none' } }}>
+                            <MicExternalOnIcon />
+                        </IconButton>
+                        <IconButton sx={{ display: { xs: 'none', md: 'block' } }}>
+                            <MicExternalOnIcon />
+                        </IconButton>
+                        <Menu
+                            id="nav-menu"
+                            anchorEl={anchorElNav}
+                            keepMounted
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={(e) => { movePage(e); handleCloseNavMenu(); }}>
+                                    {page}
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', mx: 10 } }}>
                         {pages.map((page) => (
                             <Button
                                 key={page}

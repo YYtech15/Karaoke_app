@@ -21,7 +21,7 @@ const ResponsiveButtonStack = styled(Stack)({
     flexDirection: "row",
     flexWrap: "wrap",
     "& > *": {
-        flex: "1 0 18%",
+        flex: "1 0 17%",
         width: "100%",
         margin: "5px",
     },
@@ -63,7 +63,7 @@ const Home = () => {
                 <Button onClick={() => setTargetLevel("8")} variant="contained" style={{ backgroundColor: "#2E90FF", color: "#000000" }}>Level 8</Button>
                 <Button onClick={() => setTargetLevel("9")} variant="contained" style={{ backgroundColor: "#9422FF", color: "#000000" }}>Level 9</Button>
                 <Button onClick={() => setTargetLevel("10")} variant="contained" style={{ backgroundColor: "#DA44FF", color: "#000000" }}>Level 10</Button>
-                <Button onClick={() => setTargetLevel("")} variant="contained" style={{ backgroundColor: "#FFFFFF", color: "#000000", border: "1px solid #000000"}}>Show all</Button>
+                <Button onClick={() => setTargetLevel("")} variant="contained" style={{ backgroundColor: "#FFFFFF", color: "#000000", border: "1px solid #000000" }}>Show all</Button>
             </ResponsiveButtonStack>
 
             <CardWrapper>
