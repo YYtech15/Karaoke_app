@@ -19,13 +19,18 @@ This application introduces karaoke songs by difficulty level and allows you to 
 # 機能(Features)
  - 難易度別のカラオケ曲を紹介してくれる
 （難易度は千鳥の鬼レンチャンというテレビ番組の情報を基にしています）
+ - 曲を検索して、その曲の歌詞などを調べる事が出来ます。
+ - ログインをすることで、カラオケで歌った曲の記録をTwitterのような形式で残す事が出来ます。
 
 - This app introduces karaoke songs by difficulty level.
 (Difficulty levels are based on information from a TV program called Chidori's Onirenchan)
 
 # 追加予定機能(Features to be added)
-- カラオケで歌った曲の記録をカラオケ日記という形で残す事が出来ます。
-- ルームを作成し、友達と参加する事で一緒にカラオケに行く時などに、ルーム内で各自がスコアを記録することで、そのルームでのカラオケの得点ランキングが表示されます。
+- ルームを作成し、友達と一緒にカラオケで遊ぶ時に色々なゲームが楽しめるようにする。
+ - ルーム内で各自がスコアを記録することで、そのルームでのカラオケの得点ランキングが表示される。
+ - ジャンル（年代、カテゴリー）などだけがランダムに言われ、そのジャンルの歌を歌わせる
+ - 飲みゲーが出来る
+- カラオケの得点記録を折れ線グラフの表にして、曲ごとの得点の推移を確認できるようにする。 
 
 - You can keep a record of the songs you have sung at karaoke in the form of a karaoke diary.
 - By creating a room and joining with friends to go karaoke together, each person in the room can record their own score, and the karaoke score ranking for that room will be displayed.
