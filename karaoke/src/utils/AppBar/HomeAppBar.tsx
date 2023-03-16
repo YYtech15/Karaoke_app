@@ -15,7 +15,7 @@ import MicExternalOnIcon from '@mui/icons-material/MicExternalOn';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-const pages = ['鬼レンチャン', 'ルーム', 'カラオケ日記'];
+const pages = ['曲検索', 'ルーム', 'カラオケ日記'];
 const settings = ['プロフィール', 'ログアウト'];
 
 const HomeAppBar = () => {
@@ -46,7 +46,7 @@ const HomeAppBar = () => {
             navigate("/profile");
         } else if (next_page === "ログアウト") {
             navigate("/login");
-        } else if (next_page === "鬼レンチャン") {
+        } else if (next_page === "曲検索") {
             navigate("/");
         } else if (next_page === "ルーム") {
             navigate("/room");

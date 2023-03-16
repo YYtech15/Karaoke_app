@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import HomeAppBar from "../utils/AppBar/HomeAppBar";
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { Card, CardContent, Typography } from "@mui/material";
-import styled from "@emotion/styled";
+import "tailwindcss/tailwind.css";
+import SearchTab from "../utils/Tab/SearchTab";
+import { searchSongs } from '../utils/apiClient';
+import MusicListTab from "../utils/Tab/MusicListTab";
 
 
-interface MusicData {
+interface MusicByLevelData {
     title: string;
     singer: string;
     level: string;
@@ -15,23 +15,17 @@ interface MusicData {
     updated_at: string;
 }
 
-const ResponsiveButtonStack = styled(Stack)({
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    flexWrap: "wrap",
-    "& > *": {
-        flex: "1 0 17%",
-        width: "100%",
-        margin: "6px",
-    },
-});
-
+interface MusicSearchData {
+    title: string;
+    singer: string;
+}
 
 const Home = () => {
-
-    const [data, setData] = useState<MusicData[]>([]);
+    const [tab, setTab] = useState("search");
+    const [songLevelDatas, setsongLevelDatas] = useState<MusicByLevelData[]>([]);
+    const [search, setSearch] = useState<string>("");
     const [targetLevel, setTargetLevel] = useState<string>("");
+    const [songSearchDatas, setSongSearchDatas] = useState<MusicSearchData[]>([]);
 
     const URL = "http://localhost:8000/musics";
 
@@ -39,58 +33,69 @@ const Home = () => {
         const fetchData = async () => {
             const response = await fetch(URL);
             const jsonData = await response.json();
-            setData(jsonData);
+            setsongLevelDatas(jsonData);
         };
         fetchData();
     }, []);
 
-    const handleClick = () => {
-        const filteredData = data.filter((item) => item.level === targetLevel);
-        setData(filteredData);
-    }
+    const dezzerSongs = async (query: string) => {
+        const results = await searchSongs(query);
+        const formattedResults: MusicSearchData[] = results.map((result: any) => ({
+            title: result.title,
+            singer: result.artist.name,
+        }));
+        return formattedResults;
+    };
+
+    useEffect(() => {
+        let isMounted = true;
+        if (search) {
+            dezzerSongs(search).then((results) => {
+                if (isMounted) setSongSearchDatas(results);
+            });
+        } else {
+            setSongSearchDatas([]);
+        }
+        return () => {
+            isMounted = false;
+        };
+    }, [search]);
 
     return (
         <div>
             <HomeAppBar />
-            <ResponsiveButtonStack>
-                <Button onClick={() => setTargetLevel("1")} variant="contained" style={{ backgroundColor: "#FF2929", color: "#000000" }}>Level 1</Button>
-                <Button onClick={() => setTargetLevel("2")} variant="contained" style={{ backgroundColor: "#FF5D22", color: "#000000" }}>Level 2</Button>
-                <Button onClick={() => setTargetLevel("3")} variant="contained" style={{ backgroundColor: "#FFEB3B", color: "#000000" }}>Level 3</Button>
-                <Button onClick={() => setTargetLevel("4")} variant="contained" style={{ backgroundColor: "#A4C549", color: "#000000" }}>Level 4</Button>
-                <Button onClick={() => setTargetLevel("5")} variant="contained" style={{ backgroundColor: "#45FF3B", color: "#000000" }}>Level 5</Button>
-                <Button onClick={() => setTargetLevel("6")} variant="contained" style={{ backgroundColor: "#00FF95", color: "#000000" }}>Level 6</Button>
-                <Button onClick={() => setTargetLevel("7")} variant="contained" style={{ backgroundColor: "#47E0FF", color: "#000000" }}>Level 7</Button>
-                <Button onClick={() => setTargetLevel("8")} variant="contained" style={{ backgroundColor: "#2E90FF", color: "#000000" }}>Level 8</Button>
-                <Button onClick={() => setTargetLevel("9")} variant="contained" style={{ backgroundColor: "#9422FF", color: "#000000" }}>Level 9</Button>
-                <Button onClick={() => setTargetLevel("10")} variant="contained" style={{ backgroundColor: "#DA44FF", color: "#000000" }}>Level 10</Button>
-                <Button onClick={() => setTargetLevel("")} variant="contained" style={{ backgroundColor: "#FFFFFF", color: "#000000", border: "1px solid #000000" }}>Show all</Button>
-            </ResponsiveButtonStack>
-
-            <CardWrapper>
-                {data
-                    .filter((item) => item.level === targetLevel || targetLevel === "")
-                    .map((item) => (
-                        <Card key={item.id} sx={{ minWidth: 400, margin: "10px", backgroundColor: "#EAFED8" }}>
-                            <CardContent>
-                                <Typography variant="h5" component="div" sx={{ color: 'blue' }}>
-                                    {item.title}
-                                </Typography>
-                                <Typography sx={{ mb: 0.5 }} color="green" >
-                                    {item.singer}
-                                </Typography>
-                                <Typography variant="body2" sx={{ color: 'gray' }}>Level: {item.level}</Typography>
-                            </CardContent>
-                        </Card>
-                    ))}
-            </CardWrapper>
+            <div className="container mx-auto px-4">
+                <div className="flex justify-between mb-4">
+                    <button
+                        className={`w-1/2 h-12 ${tab === "level" ? "bg-blue-400" : "bg-white"} text-black font-bold rounded-r-md`}
+                        onClick={() => setTab("level")}
+                    >
+                        難易度別
+                    </button>
+                    <button
+                        className={`w-1/2 h-12 ${tab === "search" ? "bg-blue-400" : "bg-white"} text-black font-bold rounded-l-md`}
+                        onClick={() => setTab("search")}
+                    >
+                        通常検索
+                    </button>
+                </div>
+                <SearchTab
+                    tab={tab}
+                    search={search}
+                    setSearch={setSearch}
+                    targetLevel={targetLevel}
+                    setTargetLevel={setTargetLevel}
+                />
+                <MusicListTab
+                    tab={tab}
+                    search={search}
+                    level_data={songLevelDatas}
+                    search_data={songSearchDatas}
+                    setSearch={setSearch}
+                />
+            </div>
         </div>
     );
 };
-
-const CardWrapper = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-`;
 
 export default Home;
