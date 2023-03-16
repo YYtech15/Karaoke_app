@@ -24,6 +24,8 @@ This application introduces karaoke songs by difficulty level and allows you to 
 
 - This app introduces karaoke songs by difficulty level.
 (Difficulty levels are based on information from a TV program called Chidori's Onirenchan)
+ - You can search for a song and look up its lyrics and other information.
+ - By logging in, you can keep a record of the songs you have sung at karaoke in a Twitter-like format.
 
 # 追加予定機能(Features to be added)
 - ルームを作成し、友達と一緒にカラオケで遊ぶ時に色々なゲームが楽しめるようにする。
@@ -32,8 +34,13 @@ This application introduces karaoke songs by difficulty level and allows you to 
  - 飲みゲーが出来る
 - カラオケの得点記録を折れ線グラフの表にして、曲ごとの得点の推移を確認できるようにする。 
 
-- You can keep a record of the songs you have sung at karaoke in the form of a karaoke diary.
-- By creating a room and joining with friends to go karaoke together, each person in the room can record their own score, and the karaoke score ranking for that room will be displayed.
+- Create a room so that you can enjoy various games when playing karaoke with your friends.
+- Each person in the room records his or her score, and a ranking of karaoke scores in that room is displayed.
+- Only the genre (age, category, etc.) is said at random, and the player is asked to sing a song in that genre.
+- You can play drinking games.
+- Make a line graph table of karaoke score records so that people can see how their scores change from song to song. 
+- Create a room so that you can enjoy various games when playing karaoke with your friends.
+
 # 開発環境(Development Environment)
 - node v18.13.0
 - Python 3.11.1
