@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import HomeAppBar from "../utils/AppBar/HomeAppBar";
 import "tailwindcss/tailwind.css";
 import SearchTab from "../utils/Tab/SearchTab";
-import { searchSongs } from '../utils/apiClient';
 import MusicListTab from "../utils/Tab/MusicListTab";
+import { searchSongs } from "../utils/apiClient";
 
 
 interface MusicByLevelData {
@@ -15,50 +15,42 @@ interface MusicByLevelData {
     updated_at: string;
 }
 
-interface MusicSearchData {
-    title: string;
-    singer: string;
-}
-
 const Home = () => {
-    const [tab, setTab] = useState("search");
-    const [songLevelDatas, setsongLevelDatas] = useState<MusicByLevelData[]>([]);
+    const [tab, setTab] = useState("level");
+    const [songLevelDatas, setSongLevelDatas] = useState<MusicByLevelData[]>([]);
     const [search, setSearch] = useState<string>("");
     const [targetLevel, setTargetLevel] = useState<string>("");
-    const [songSearchDatas, setSongSearchDatas] = useState<MusicSearchData[]>([]);
+    const [searchData, setSearchData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const URL = "http://localhost:8000/musics";
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             const response = await fetch(URL);
             const jsonData = await response.json();
-            setsongLevelDatas(jsonData);
+            setSongLevelDatas(jsonData);
         };
         fetchData();
+        setLoading(false);
     }, []);
 
-    const dezzerSongs = async (query: string) => {
-        const results = await searchSongs(query);
-        const formattedResults: MusicSearchData[] = results.map((result: any) => ({
-            title: result.title,
-            singer: result.artist.name,
-        }));
-        return formattedResults;
-    };
-
     useEffect(() => {
-        let isMounted = true;
-        if (search) {
-            dezzerSongs(search).then((results) => {
-                if (isMounted) setSongSearchDatas(results);
-            });
+        if (search.length > 0) {
+            setLoading(true);
+            searchSongs(search)
+                .then((response) => {
+                    setSearchData(response);
+                    setLoading(false);
+                })
+                .catch((error) => {
+                    console.error('Error fetching search data:', error);
+                    setLoading(false);
+                });
         } else {
-            setSongSearchDatas([]);
+            setSearchData([]);
         }
-        return () => {
-            isMounted = false;
-        };
     }, [search]);
 
     return (
@@ -88,10 +80,11 @@ const Home = () => {
                 />
                 <MusicListTab
                     tab={tab}
-                    search={search}
+                    input={search}
                     level_data={songLevelDatas}
-                    search_data={songSearchDatas}
+                    search_data={searchData}
                     setSearch={setSearch}
+                    loading={loading}
                 />
             </div>
         </div>

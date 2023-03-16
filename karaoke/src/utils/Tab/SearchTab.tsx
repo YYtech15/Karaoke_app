@@ -15,16 +15,26 @@ const SearchTab: React.FC<TabContentProps> = ({
     targetLevel,
     setTargetLevel,
 }) => {
+
+    const clearInput = () => {
+        setSearch("");
+    };
+
     if (tab === "level") {
         return (
             <>
-                <input
-                    type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Search by title or singer"
-                    className="w-full h-12 mb-4 px-4 bg-white border-2 border-gray-300 rounded-md"
-                />
+                <div className="flex items-center w-full">
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Search by title or singer"
+                        className="w-full h-12 px-4 bg-white border-2 border-gray-300 rounded-md"
+                    />
+                    <button onClick={clearInput} className="ml-2 text-white bg-red-500 px-3 py-1 rounded-md">
+                        Clear
+                    </button>
+                </div>
                 <div className="grid grid-cols-10 gap-x-3 gap-y-1">
                     {[...Array(10)].map((_, idx) => (
                         <GradientButton
@@ -42,13 +52,18 @@ const SearchTab: React.FC<TabContentProps> = ({
         );
     } else if (tab === "search") {
         return (
-            <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by title or singer"
-                className="w-full h-12 mb-4 px-4 bg-white border-2 border-gray-300 rounded-md"
-            />
+            <div className="flex items-center w-full">
+                <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search by title or singer"
+                    className="w-full h-12 px-4 bg-white border-2 border-gray-300 rounded-md"
+                />
+                <button onClick={clearInput} className="ml-2 text-white bg-red-500 px-3 py-1 rounded-md">
+                    Clear
+                </button>
+            </div>
         );
     }
 
