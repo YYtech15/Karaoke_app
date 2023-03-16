@@ -51,7 +51,7 @@ const HomeAppBar = () => {
         } else if (next_page === "ルーム") {
             navigate("/room");
         } else if (next_page === "カラオケ日記") {
-            navigate("/diary");
+            navigate("/timeline");
         }
         handleCloseUserMenu();
     };

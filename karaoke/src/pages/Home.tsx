@@ -3,7 +3,7 @@ import HomeAppBar from "../utils/AppBar/HomeAppBar";
 import "tailwindcss/tailwind.css";
 import SearchTab from "../utils/Tab/SearchTab";
 import MusicListTab from "../utils/Tab/MusicListTab";
-import { searchSongs } from "../utils/apiClient";
+import { MusicBySearchData, searchSongs } from "../utils/apiClient";
 
 
 interface MusicByLevelData {
@@ -21,6 +21,7 @@ const Home = () => {
     const [search, setSearch] = useState<string>("");
     const [targetLevel, setTargetLevel] = useState<string>("");
     const [searchData, setSearchData] = useState([]);
+    const [selectedSong, setSelectedSong] = useState<MusicBySearchData>();
     const [loading, setLoading] = useState(false);
 
     const URL = "http://localhost:8000/musics";
@@ -77,6 +78,7 @@ const Home = () => {
                     setSearch={setSearch}
                     targetLevel={targetLevel}
                     setTargetLevel={setTargetLevel}
+                    setSelectedSong={setSelectedSong}
                 />
                 <MusicListTab
                     tab={tab}
@@ -85,6 +87,8 @@ const Home = () => {
                     search_data={searchData}
                     setSearch={setSearch}
                     loading={loading}
+                    selectedSong={selectedSong}
+                    setSelectedSong={setSelectedSong}
                 />
             </div>
         </div>

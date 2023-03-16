@@ -1,11 +1,5 @@
 const API_BASE_URL = 'http://localhost:8000';
 
-export interface Score {
-    song: string;
-    score: number;
-    machine: string;
-}
-
 export interface MusicBySearchData {
     title: string;
     singer: string;
@@ -25,32 +19,46 @@ export interface SongSearchData {
     thumbnail: string;
 }
 
+export interface Score {
+    id: number;
+    title: string;
+    artist: string
+    machine: string;
+    score: number;
+}
 
-export async function createScore(score: Score): Promise<Score> {
+export interface DetailSong {
+    id: number;
+    title: string;
+    artist: string
+    score: number;
+    scoreHistory: [];
+    lyrics: string;
+}
+
+export const fetchScores = async (): Promise<Score[]> => {
+    const response = await fetch(`${API_BASE_URL}/scores/`);
+    const data = await response.json();
+    return data;
+};
+
+export const createScore = async (score: Omit<Score, "id">): Promise<Score> => {
     const response = await fetch(`${API_BASE_URL}/scores/`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(score),
     });
+    const data = await response.json();
+    return data;
+};
 
-    if (!response.ok) {
-        throw new Error('Failed to create score');
-    }
-
-    return response.json();
-}
-
-export async function fetchScores(): Promise<Score[]> {
-    const response = await fetch(`${API_BASE_URL}/scores/`);
-
-    if (!response.ok) {
-        throw new Error('Failed to fetch scores');
-    }
-
-    return response.json();
-}
+export const deleteScore = async (scoreId: number): Promise<void> => {
+    await fetch(`${API_BASE_URL}/scores/${scoreId}`, {
+        method: "DELETE",
+    });
+};
 
 export const searchSongs = async (query: string) => {
     try {
